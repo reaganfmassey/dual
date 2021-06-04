@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZHJrLW1hdHRlciIsImEiOiJja210eWlyNDIwdndzMndtd3djbXJkdThpIn0.p6QTAZ2l0SYNPMU8Xb31yg';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [lat, lon], // starting position [lng, lat]
+
+    });
+</script>
+<div id='map'></div>
+
+<style>
+    body { margin: 0; padding-right: 100px; }
+    #map { position: fixed; top: 200px; bottom: 5px; width: 100%; left: 100px; padding-right: 100px;}
+</style>
+
+
+<title>Aid Map</title>
+</head>
+<body>
+<h1>Aid Map</h1>
+<p>
+    latitude: <span id="latitude"></span>&deg;<br />
+    longitude: <span id="longitude"></span>&deg;
+</p>
+
+<script>
+    if ('geolocation' in navigator) {
+        console.log('geolocation available');
+        navigator.geolocation.getCurrentPosition(position => {
+            lat = position.coords.latitude;
+            lon = position.coords.longitude;
+            console.log(lat, lon);
+            document.getElementById('latitude').textContent = lat;
+            document.getElementById('longitude').textContent = lon;
+            mapboxgl.accessToken = 'pk.eyJ1IjoiZHJrLW1hdHRlciIsImEiOiJja210eWlyNDIwdndzMndtd3djbXJkdThpIn0.p6QTAZ2l0SYNPMU8Xb31yg';
+            var map = new mapboxgl.Map({
+                container: 'map', // container id
+                style: 'mapbox://styles/drk-matter/ckn0bti2y04xx17mw9urapimf',
+                center: [lon,lat], // starting position [lng, lat]
+                zoom: 10,
+            });
+    });
+    }else {
+        console.log('geolocation not available');
+    }
+</script>
+
+
+</body>
+</html>
